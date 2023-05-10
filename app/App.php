@@ -15,3 +15,26 @@ function getTransactionFiles(string $dirPath): array {
 
     return $files;  
 }
+
+function getTransactions(string $fileName): array
+{
+    if (!file_exists($fileName)) {
+        trigger_error("File {$fileName} does not exist", E_USER_ERROR);
+    }
+
+    // Read the transactions file
+    $file = fopen($fileName, 'r');
+    
+    /* This read the first line of the CVS (headers) and ommit it
+    from the actual transactions */
+    fgetcsv($file);
+
+    /* If doesn't have an error. Saves each line transactions CSV files 
+    as a new transaction on the transactions Array */
+    $transactions = [];
+    while(($transaction = fgetcsv($file)) !== false){
+        $transactions[] = $transaction;
+    };
+
+    return $transactions;
+}
