@@ -16,10 +16,16 @@ function getTransactionFiles(string $dirPath): array {
     return $files;  
 }
 
-function getTransactions(string $fileName): array
+function getTransactions(string $fileName, ?callable $transactionHandler = null): array
 {
     if (!file_exists($fileName)) {
         trigger_error("File {$fileName} does not exist", E_USER_ERROR);
+    }
+
+    /* To work with different transaction extractor functions
+    the parent function receive a optional callable function parameter */
+    if ($transactionHandler != null) {
+        $transaction = $transactionHandler;
     }
 
     // Read the transactions file
