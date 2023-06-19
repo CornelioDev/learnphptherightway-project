@@ -4,6 +4,9 @@
 <head>
     <title>Transactions</title>
     <style>
+        body{
+            font-family: sans-serif;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
