@@ -10,3 +10,7 @@ function formatDollarAmount(float $amount): string {
 function dateFormat(string $date): string {
     return date('M j, Y', strtotime($date));
 }
+
+function amountColor(float $amount): string {
+    return $amount > 0 ? 'green' : ($amount < 0 ? 'red' : 'black');
+}
